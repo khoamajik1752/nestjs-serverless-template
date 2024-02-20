@@ -8,13 +8,13 @@ provider:
  name: aws
  deploymentMethod: direct
  runtime: nodejs20.x
- stage: ${opt:stage, 'dev'}
+#  stage: ${opt:stage, 'dev'}
  region: ap-southeast-1
  versionFunctions: false
 
 functions:
   apiHandler:
-    handler: ./dist/serverless.handler
+    handler: ./src/serverless.handler
     timeout: 900
     events:
       - http:
@@ -27,6 +27,7 @@ functions:
           cors: true
 custom:
   webpack:
+    webpackConfig: 'webpack.config.js'
     includeModules:
       forceExclude:
         - aws-sdk
